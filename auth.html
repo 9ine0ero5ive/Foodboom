@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Вход и регистрация — FOOD BOOM</title>
+    <meta name="description" content="Войдите или зарегистрируйтесь в FOOD BOOM — заказывайте быстрее и получайте бонусы.">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23ff5e1a'/%3E%3Ctext x='50' y='68' font-size='60' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'%3EF%3C/text%3E%3C/svg%3E">
+    <link rel="stylesheet" href="style.css?v=20261109">
+</head>
+<body class="auth-page-body">
+
+<header class="header" id="header">
+    <div class="container header__inner">
+        <a href="index.html" class="logo" aria-label="FOOD BOOM — на главную">FOOD<span>BOOM</span></a>
+        <div class="header__actions">
+            <a href="index.html" class="btn btn--outline">← В меню</a>
+        </div>
+    </div>
+</header>
+
+<main class="auth-page">
+    <div class="container">
+        <div class="auth-card">
+            
+            <!-- КНОПКА ВХОДА ГОСТЯ -->
+            <div style="padding: 20px 32px 0;">
+                <button type="button" class="btn btn--outline btn--block" id="guestLoginBtn" style="border-style: dashed;">👤 Продолжить как гость</button>
+                <div style="text-align: center; margin: 15px 0; font-size: 13px; color: #888;">или войдите в аккаунт</div>
+            </div>
+
+            <div class="auth-tabs" role="tablist">
+                <button type="button" class="auth-tab active" data-tab="login" role="tab" aria-selected="true">Вход</button>
+                <button type="button" class="auth-tab" data-tab="register" role="tab" aria-selected="false">Регистрация</button>
+            </div>
+
+            <!-- ================= ВХОД ================= -->
+            <form class="auth-form active" id="loginForm" data-panel="login" novalidate>
+                <h1 class="auth-title">С возвращением!</h1>
+                <p class="auth-subtitle">Войдите, чтобы заказывать быстрее</p>
+
+                <div class="form-group">
+                    <label for="loginIdentifier">Email или телефон <span class="req">*</span></label>
+                    <input type="text" id="loginIdentifier" name="identifier" class="form-control" placeholder="example@mail.ru или +7 (999) 123-45-67" autocomplete="username" required>
+                    <span class="form-hint">Введите email или телефон</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="loginPassword">Пароль <span class="req">*</span></label>
+                    <div class="password-wrap">
+                        <input type="password" id="loginPassword" name="password" class="form-control" placeholder="Введите пароль" autocomplete="current-password" required>
+                        <button type="button" class="toggle-password" aria-label="Показать пароль">👁</button>
+                    </div>
+                    <span class="form-hint">Неверный email/телефон или пароль</span>
+                </div>
+
+                <div class="auth-row">
+                    <label class="remember-me">
+                        <input type="checkbox" id="rememberMe">
+                        <span>Запомнить меня</span>
+                    </label>
+                    <a href="#" class="forgot-link" id="forgotLink">Забыли пароль?</a>
+                </div>
+
+                <button type="submit" class="btn btn--primary btn--block">Войти</button>
+
+                <div class="auth-divider"><span>или войдите через</span></div>
+
+                <div class="social-buttons">
+                    <button type="button" class="social-btn social-btn--vk" data-provider="ВКонтакте" aria-label="Войти через ВКонтакте">
+                        <span class="social-btn__icon">VK</span>
+                        <span>ВКонтакте</span>
+                    </button>
+                    <button type="button" class="social-btn social-btn--yandex" data-provider="Яндекс" aria-label="Войти через Яндекс">
+                        <span class="social-btn__icon">Я</span>
+                        <span>Яндекс</span>
+                    </button>
+                    <button type="button" class="social-btn social-btn--google" data-provider="Google" aria-label="Войти через Google">
+                        <span class="social-btn__icon">G</span>
+                        <span>Google</span>
+                    </button>
+                    <button type="button" class="social-btn social-btn--telegram" data-provider="Telegram" aria-label="Войти через Telegram">
+                        <span class="social-btn__icon">✈</span>
+                        <span>Telegram</span>
+                    </button>
+                    <button type="button" class="social-btn social-btn--apple" data-provider="Apple" aria-label="Войти через Apple">
+                        <span class="social-btn__icon"></span>
+                        <span>Apple</span>
+                    </button>
+                </div>
+
+                <p class="auth-switch">
+                    Нет аккаунта?
+                    <a href="#" data-switch="register">Зарегистрироваться</a>
+                </p>
+            </form>
+
+            <!-- ================= РЕГИСТРАЦИЯ ================= -->
+            <form class="auth-form" id="registerForm" data-panel="register" novalidate>
+                <h1 class="auth-title">Создать аккаунт</h1>
+                <p class="auth-subtitle">Заказывайте быстрее и получайте бонусы</p>
+
+                <div class="form-group">
+                    <label for="regName">Имя <span class="req">*</span></label>
+                    <input type="text" id="regName" name="name" class="form-control" placeholder="Как к вам обращаться?" autocomplete="given-name" required minlength="2">
+                    <span class="form-hint">Минимум 2 символа</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="regEmail">Email <span class="req">*</span></label>
+                    <input type="email" id="regEmail" name="email" class="form-control" placeholder="example@mail.ru" autocomplete="email" required>
+                    <span class="form-hint">Введите корректный email</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="regPhone">Телефон <span class="req">*</span></label>
+                    <input type="tel" id="regPhone" name="phone" class="form-control" placeholder="+7 (___) ___-__-__" autocomplete="tel" inputmode="tel" required>
+                    <span class="form-hint">Введите номер полностью</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="regPassword">Пароль <span class="req">*</span></label>
+                    <div class="password-wrap">
+                        <input type="password" id="regPassword" name="password" class="form-control" placeholder="Минимум 8 символов" autocomplete="new-password" required minlength="8">
+                        <button type="button" class="toggle-password" aria-label="Показать пароль">👁</button>
+                    </div>
+                    <div class="password-strength" id="passwordStrength" aria-hidden="true">
+                        <span></span><span></span><span></span><span></span>
+                    </div>
+                    <span class="form-hint">Минимум 8 символов, хотя бы одна буква и одна цифра</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="regPassword2">Повторите пароль <span class="req">*</span></label>
+                    <div class="password-wrap">
+                        <input type="password" id="regPassword2" name="password2" class="form-control" placeholder="Ещё раз" autocomplete="new-password" required>
+                        <button type="button" class="toggle-password" aria-label="Показать пароль">👁</button>
+                    </div>
+                    <span class="form-hint">Пароли не совпадают</span>
+                </div>
+
+                <div class="consent-checkbox">
+                    <input type="checkbox" id="regConsentAll" required>
+                    <label for="regConsentAll">
+                        Я даю <a href="consent.html" target="_blank" rel="noopener">согласие на обработку персональных данных</a> 
+                        и принимаю <a href="privacy.html" target="_blank" rel="noopener">Политику конфиденциальности</a>
+                        <span class="req">*</span>
+                    </label>
+                </div>
+                <span class="form-hint" id="regConsentAllHint" style="display:none; margin-bottom: 12px;">Отметьте согласие, чтобы продолжить</span>
+
+                <div class="consent-checkbox consent-checkbox--optional">
+                    <input type="checkbox" id="regMarketing">
+                    <label for="regMarketing">Хочу получать новости и акции на email</label>
+                </div>
+
+                <button type="submit" class="btn btn--primary btn--block">Зарегистрироваться</button>
+
+                <div class="auth-divider"><span>или через</span></div>
+
+                <div class="social-buttons">
+                    <button type="button" class="social-btn social-btn--vk" data-provider="ВКонтакте" aria-label="Зарегистрироваться через ВКонтакте">
+                        <span class="social-btn__icon">VK</span>
+                        <span>ВКонтакте</span>
+                    </button>
+                    <button type="button" class="social-btn social-btn--yandex" data-provider="Яндекс" aria-label="Зарегистрироваться через Яндекс">
+                        <span class="social-btn__icon">Я</span>
+                        <span>Яндекс</span>
+                    </button>
+                    <button type="button" class="social-btn social-btn--google" data-provider="Google" aria-label="Зарегистрироваться через Google">
+                        <span class="social-btn__icon">G</span>
+                        <span>Google</span>
+                    </button>
+                    <button type="button" class="social-btn social-btn--telegram" data-provider="Telegram" aria-label="Зарегистрироваться через Telegram">
+                        <span class="social-btn__icon">✈</span>
+                        <span>Telegram</span>
+                    </button>
+                    <button type="button" class="social-btn social-btn--apple" data-provider="Apple" aria-label="Зарегистрироваться через Apple">
+                        <span class="social-btn__icon"></span>
+                        <span>Apple</span>
+                    </button>
+                </div>
+
+                <p class="auth-switch">
+                    Уже есть аккаунт?
+                    <a href="#" data-switch="login">Войти</a>
+                </p>
+            </form>
+        </div>
+    </div>
+</main>
+
+<div class="toast" id="toast" role="status" aria-live="polite">
+    <span aria-hidden="true">✓</span>
+    <span id="toastText">Готово</span>
+</div>
+
+<script src="auth.js?v=20261109" defer></script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+[
+    {
+        "id": "FB-987878",
+        "date": "2026-11-02T23:59:47.878Z",
+        "status": "new",
+        "isGuest": true,
+        "customer": {
+            "name": "rus",
+            "phone": "+7 (914) 332-32-32",
+            "address": "дом 12",
+            "comment": "без лука"
+        },
+        "accountEmail": "Гость",
+        "items": [
+            {
+                "id": "set-tokyo",
+                "name": "Сет Токио",
+                "price": 1290,
+                "image": "https:\/\/foodboom\/image\/tokyo-set.jpg",
+                "qty": 1
+            }
+        ],
+        "total": 1490,
+        "delivery": "Доставка",
+        "payment": "наличными курьеру"
+    }
+]

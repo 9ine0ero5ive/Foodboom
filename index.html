@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>FOOD BOOM — Вкусная еда с доставкой за 60 минут</title>
+    <meta name="description" content="Доставка суши, роллов, пиццы и других блюд круглосуточно. Быстро, вкусно, свежие ингредиенты. Оплата картой, СБП или наличными.">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="FOOD BOOM — Доставка еды 24/7">
+    <meta property="og:description" content="Суши, роллы и пицца с доставкой за 60 минут. Работаем круглосуточно.">
+    <meta property="og:image" content="image/sushi-rolls.jpg">
+    <meta property="og:locale" content="ru_RU">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23ff5e1a'/%3E%3Ctext x='50' y='68' font-size='60' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'%3EF%3C/text%3E%3C/svg%3E">
+    <link rel="stylesheet" href="style.css?v=20261109">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Restaurant",
+      "name": "FOOD BOOM",
+      "image": "image/sushi-rolls.jpg",
+      "servesCuisine": ["Японская", "Итальянская", "Азиатская"],
+      "priceRange": "₽₽",
+      "telephone": "+7-411-250-57-07",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "ул. Дежнева, 57",
+        "addressLocality": "Якутск",
+        "addressCountry": "RU"
+      },
+      "openingHours": "Mo-Su 00:00-24:00"
+    }
+    </script>
+</head>
+<body>
+
+    <a href="#main" class="skip-link">Перейти к содержимому</a>
+
+    <header class="header" id="header">
+        <div class="container header__inner">
+            <a href="#" class="logo" aria-label="FOOD BOOM — на главную">FOOD<span>BOOM</span></a>
+            <nav class="nav" id="nav" aria-label="Основное меню">
+                <a href="#menu">Меню</a>
+                <a href="blog.html">Блог</a>
+                <a href="#promo">Акции</a>
+                <a href="#reviews">Отзывы</a>
+                <a href="#faq">FAQ</a>
+                <a href="#contacts">Контакты</a>
+            </nav>
+            <div class="header__actions">
+                <div class="user-menu" id="userMenu">
+                    <a href="auth.html" class="btn btn--outline user-menu__login" id="loginLink">Войти</a>
+                    <div class="user-menu__logged" id="loggedUser" style="display:none;">
+                        <button type="button" class="user-menu__toggle" id="userMenuToggle" aria-haspopup="true" aria-expanded="false">
+                            <span class="user-menu__avatar" id="userAvatar">?</span>
+                            <span class="user-menu__name" id="userName">Пользователь</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </button>
+                        <div class="user-menu__dropdown" id="userDropdown" role="menu">
+                            <a href="#" class="user-menu__item" role="menuitem">Мои заказы</a>
+                            <a href="auth.html" class="user-menu__item" role="menuitem">Настройки профиля</a>
+                            <button type="button" class="user-menu__item user-menu__logout" id="logoutBtn" role="menuitem">Выйти</button>
+                        </div>
+                    </div>
+                </div>
+                <button class="cart-toggle" id="cartToggle" aria-label="Открыть корзину">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <path d="M16 10a4 4 0 0 1-8 0"></path>
+                    </svg>
+                    <span class="cart-badge" id="cartBadge" aria-live="polite">0</span>
+                </button>
+                <button class="burger" id="burger" aria-label="Открыть меню" aria-expanded="false" aria-controls="nav">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main id="main">
+        <section class="hero">
+            <div class="container hero__inner">
+                <div class="hero__content">
+                    <div class="hero__badge">Доставка 24/7 без выходных</div>
+                    <h1 class="hero__title">
+                        Вкусная еда<br>
+                        с доставкой <span>за 60 минут</span>
+                    </h1>
+                    <p class="hero__text">
+                        Суши, роллы, пицца и другие любимые блюда. Готовим из свежих ингредиентов и доставляем в любое время суток.
+                    </p>
+                    <div class="hero__meta">
+                        <div class="hero__meta-item"><span class="icon">⚡</span>Среднее время — 45 мин</div>
+                        <div class="hero__meta-item"><span class="icon">🎁</span>Бесплатно от 1500 ₽</div>
+                    </div>
+                    <div class="hero__actions">
+                        <a href="#menu" class="btn btn--primary">Выбрать блюдо</a>
+                        <a href="#promo" class="btn btn--outline">Акции</a>
+                    </div>
+                </div>
+                <div class="hero__image">
+                    <picture><source type="image/webp" srcset="image/optimized/sushi-rolls-320.webp 320w, image/optimized/sushi-rolls-640.webp 640w, image/optimized/sushi-rolls-960.webp 960w, image/optimized/sushi-rolls-1200.webp 1200w" sizes="(max-width: 768px) calc(100vw - 32px), (max-width: 992px) 520px, (max-width: 1248px) calc((100vw - 96px) / 2), 520px"><img class="hero__image-main" src="image/sushi-rolls.jpg" alt="Свежие суши и роллы" loading="eager" fetchpriority="high" decoding="async" width="1200" height="800"></picture>
+                    <picture><source media="(max-width: 480px)" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"><source type="image/webp" media="(min-width: 481px)" srcset="image/optimized/philadelphia-rolls-320.webp 320w, image/optimized/philadelphia-rolls-640.webp 640w, image/optimized/philadelphia-rolls-800.webp 800w" sizes="(max-width: 992px) 120px, 160px"><img class="hero__image-accent" src="image/philadelphia-rolls.jpg" alt="Роллы Филадельфия" loading="lazy" decoding="async" width="800" height="1421"></picture>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="menu">
+            <div class="container">
+                <div class="section__header anim">
+                    <h2 class="section__title">Наше меню</h2>
+                    <p class="section__subtitle">Более 50 блюд на любой вкус. Свежее и горячее — прямо к вашей двери</p>
+                </div>
+
+                <div class="toolbar anim">
+                    <div class="search-box">
+                        <input type="search" id="searchInput" placeholder="Найти блюдо..." aria-label="Поиск блюда по названию">
+                    </div>
+                    <select class="sort-select" id="sortSelect" aria-label="Сортировка блюд">
+                        <option value="default">По популярности</option>
+                        <option value="price-asc">Сначала дешевле</option>
+                        <option value="price-desc">Сначала дороже</option>
+                        <option value="name">По названию</option>
+                    </select>
+                </div>
+
+                <div class="categories anim" id="categories">
+                    <button class="category-btn active" data-category="all">Все</button>
+                    <button class="category-btn" data-category="sets">Сеты</button>
+                    <button class="category-btn" data-category="sushi">Суши</button>
+                    <button class="category-btn" data-category="rolls">Роллы</button>
+                    <button class="category-btn" data-category="pizza">Пицца</button>
+                    <button class="category-btn" data-category="soup">Супы</button>
+                    <button class="category-btn" data-category="desserts">Десерты</button>
+                    <button class="category-btn" data-category="drinks">Напитки</button>
+                </div>
+
+                <div class="cards" id="cards">
+                    <!-- Карточки товаров (без изменений) -->
+                    <div class="card" data-category="sets" data-price="1290" data-name="Сет Токио" data-id="set-tokyo">
+                        <div class="card__image-wrap">
+                            <div class="card__badges">
+                                <span class="card__badge card__badge--hit">Хит</span>
+                                <span class="card__badge card__badge--sale">−24%</span>
+                            </div>
+                            <picture><source type="image/webp" srcset="image/optimized/tokyo-set-320.webp 320w, image/optimized/tokyo-set-640.webp 640w, image/optimized/tokyo-set-800.webp 800w" sizes="(max-width: 575px) calc(100vw - 32px), (max-width: 899px) calc((100vw - 68px) / 2), (max-width: 1199px) calc((100vw - 104px) / 3), (max-width: 1248px) calc((100vw - 132px) / 4), 267px"><img class="card__image" src="image/tokyo-set.jpg" alt="Сет Токио — 40 кусочков суши и роллов" loading="lazy" decoding="async" width="800" height="1000"></picture>
+                        </div>
+                        <div class="card__body">
+                            <div class="card__title-row">
+                                <h3 class="card__title">Сет Токио</h3>
+                                <span class="card__weight">40 кусочков</span>
+                            </div>
+                            <div class="card__rating"><span class="stars">★★★★★</span><span>4.9</span><span>·</span><span>127 отзывов</span></div>
+                            <p class="card__desc">Филадельфия, Калифорния, запечённые роллы и нигири с лососем — большой набор для компании.</p>
+                            <div class="card__footer" data-card-footer></div>
+                        </div>
+                    </div>
+                    <div class="card" data-category="sets" data-price="1490" data-name="Сет Филадельфия" data-id="set-philadelphia">
+                        <div class="card__image-wrap">
+                            <div class="card__badges"><span class="card__badge card__badge--new">Новинка</span></div>
+                            <picture><source type="image/webp" srcset="image/optimized/philadelphia-rolls-320.webp 320w, image/optimized/philadelphia-rolls-640.webp 640w, image/optimized/philadelphia-rolls-800.webp 800w" sizes="(max-width: 575px) calc(100vw - 32px), (max-width: 899px) calc((100vw - 68px) / 2), (max-width: 1199px) calc((100vw - 104px) / 3), (max-width: 1248px) calc((100vw - 132px) / 4), 267px"><img class="card__image" src="image/philadelphia-rolls.jpg" alt="Сет Филадельфия — роллы с лососем" loading="lazy" decoding="async" width="800" height="1421"></picture>
+                        </div>
+                        <div class="card__body">
+                            <div class="card__title-row">
+                                <h3 class="card__title">Сет Филадельфия</h3>
+                                <span class="card__weight">32 кусочка</span>
+                            </div>
+                            <div class="card__rating"><span class="stars">★★★★★</span><span>5.0</span><span>·</span><span>189 отзывов</span></div>
+                            <p class="card__desc">32 кусочка роллов с лососем и сливочным сыром — на большую компанию.</p>
+                            <div class="card__footer" data-card-footer></div>
+                        </div>
+                    </div>
+                    <div class="card" data-category="sets" data-price="990" data-name="Сет Калифорния" data-id="set-california">
+                        <div class="card__image-wrap">
+                            <picture><source type="image/webp" srcset="image/optimized/california-rolls-320.webp 320w, image/optimized/california-rolls-640.webp 640w, image/optimized/california-rolls-800.webp 800w" sizes="(max-width: 575px) calc(100vw - 32px), (max-width: 899px) calc((100vw - 68px) / 2), (max-width: 1199px) calc((100vw - 104px) / 3), (max-width: 1248px) calc((100vw - 132px) / 4), 267px"><img class="card__image" src="image/california-rolls.jpg" alt="Сет Калифорния — роллы с крабом и авокадо" loading="lazy" decoding="async" width="800" height="640"></picture>
+                        </div>
+                        <div class="card__body">
+                            <div class="card__title-row">
+                                <h3 class="card__title">Сет Калифорния</h3>
+                                <span class="card__weight">24 кусочка</span>
+                            </div>
+                            <div class="card__rating"><span class="stars">★★★★★</span><span>4.8</span><span>·</span><span>95 отзывов</span></div>
+                            <p class="card__desc">Нежные роллы с крабом, авокадо и икрой тобико — лёгкий и свежий вкус.</p>
+                            <div class="card__footer" data-card-footer></div>
+                        </div>
+                    </div>
+                    <div class="card" data-category="sets" data-price="890" data-name="Сет Запечённый" data-id="set-baked">
+                        <div class="card__image-wrap">
+                            <div class="card__badges"><span class="card__badge card__badge--new">Новинка</span></div>
+                            <picture><source type="image/webp" srcset="image/optimized/baked-rolls-320.webp 320w, image/optimized/baked-rolls-640.webp 640w, image/optimized/baked-rolls-800.webp 800w" sizes="(max-width: 575px) calc(100vw - 32px), (max-width: 899px) calc((100vw - 68px) / 2), (max-width: 1199px) calc((100vw - 104px) / 3), (max-width: 1248px) calc((100vw - 132px) / 4), 267px"><img class="card__image" src="image/baked-rolls.jpg" alt="Сет Запечённый — роллы под сырной корочкой" loading="lazy" decoding="async" width="800" height="533"></picture>
+                        </div>
+                        <div class="card__body">
+                            <div class="card__title-row">
+                                <h3 class="card__title">Сет Запечённый</h3>
+                                <span class="card__weight">24 кусочка</span>
+                            </div>
+                            <div class="card__rating"><span class="stars">★★★★☆</span><span>4.7</span><span>·</span><span>64 отзыва</span></div>
+                            <p class="card__desc">Горячие роллы под сырной шапкой с лососем и крабом — для любителей запечённого.</p>
+                            <div class="card__footer" data-card-footer></div>
+                        </div>
+                    </div>
+                    <div class="card" data-category="sushi" data-price="590" data-name="Суши ассорти" data-id="sushi-set">
+                        <div class="card__image-wrap">
+                            <div class="card__badges"><span class="card__badge card__badge--hit">Хит</span></div>
+                            <picture><source type="image/webp" srcset="image/optimized/sushi-rolls-320.webp 320w, image/optimized/sushi-rolls-640.webp 640w, image/optimized/sushi-rolls-960.webp 960w, image/optimized/sushi-rolls-1200.webp 1200w" sizes="(max-width: 575px) calc(100vw - 32px), (max-width: 899px) calc((100vw - 68px) / 2), (max-width: 1199px) calc((100vw - 104px) / 3), (max-width: 1248px) calc((100vw - 132px) / 4), 267px"><img class="card__image" src="image/sushi-rolls.jpg" alt="Суши ассорти" loading="lazy" decoding="async" width="1200" height="800"></picture>
+                        </div>
+                        <div class="card__body">
+                            <div class="card__title-row">
+                                <h3 class="card__title">Суши ассорти</h3>
+                                <span class="card__weight">380 г</span>
+                            </div>
+                            <div class="card__rating"><span class="stars">★★★★★</span><span>4.9</span><span>·</span><span>127 отзывов</span></div>
+                            <p class="card__desc">Нежный лосось, тунец, креветка и свежие овощи на подушке из риса.</p>
+                            <div class="card__footer" data-card-footer></div>
+                        </div>
+                    </div>
+                    <div class="card" data-category="sushi" data-price="180" data-name="Суши с лососем" data-id="salmon-nigiri">
+                        <div class="card__image-wrap">
+                            <picture><source type="image/webp" srcset="image/optimized/salmon-nigiri-320.webp 320w, image/optimized/salmon-nigiri-640.webp 640w, image/optimized/salmon-nigiri-800.webp 800w" sizes="(max-width: 575px) calc(100vw - 32px), (max-width: 899px) calc((100vw - 68px) / 2), (max-width: 1199px) calc((100vw - 104px) / 3), (max-width: 1248px) calc((100vw - 132px) / 4), 267px"><img class="card__image" src="image/salmon-nigiri.jpg" alt="Суши с лососем" loading="lazy" decoding="async" width="800" height="450"></picture>
+                        </div>
+                        <div class="card__body">
+                            <div class="card__title-row">
+                                <h3 class="card__title">Суши с лососем</h3>
+                                <span class="card__weight">60 г</span>
+                            </div>
+                            <div class="card__rating"><span class="stars">★★★★★</span><span>4.8</span><span>·</span><span>88 отзывов</span></div>
+                            <p class="card__desc">Свежий лосось на рисовой подушке. Классика, которую любят все.</p>
+                            <div class="card__footer" data-card-footer></div>
+                        </div>
+                    </div>
+                    <div class="card" data-category="rolls" data-price="490" data-name="Ролл Филадельфия" data-id="philadelphia">
+                        <div class="card__image-wrap">
+                            <div class="card__badges"><span class="card__badge card__badge--hit">Хит</span></div>
+                            <picture><source type="image/webp" srcset="image/optimized/philadelphia-rolls-320.webp 320w, image/optimized/philadelphia-rolls-640.webp 640w, image/optimized/philadelphia-rolls-800.webp 800w" sizes="(max-width: 575px) calc(100vw - 32px), (max-width: 899px) calc((100vw - 68px) / 2), (max-width: 1199px) calc((100vw - 104px) / 3), (max-width: 1248px) calc((100vw - 132px) / 4), 267px"><img class="card__image" src="image/philadelphia-rolls.jpg" alt="Ролл Филадельфия" loading="lazy" decoding="async" width="800" height="1421"></picture>
+                        </div>
+                        <div class="card__body">
+                            <div class="card__title-row">
+                                <h3 class="card__title">Ролл Филадельфия</h3>
+                                <span class="card__weight">280 г</span>
+                            </div>
+                            <div class="card__rating"><span class="stars">★★★★★</span><span>5.0</span><span>·</span><span>203 отзыва</span></div>
+                            <p class="card__desc">Классика с лососем, сливочным сыром и свежим огурцом.</p>
+                            <div class="card__footer" data-card-footer></div>
+                        </div>
+                    </div>
+                    <div class="card" data-category="rolls" data-price="450" data-name="Запечённые роллы" data-id="baked-rolls">
+                        <div class="card__image-wrap">
+                            <picture><source type="image/webp" srcset="image/optimized/baked-rolls-320.webp 320w, image/optimized/baked-rolls-640.webp 640w, image/optimized/baked-rolls-800.webp 800w" sizes="(max-width: 575px) calc(100vw - 32px), (max-width: 899px) calc((100vw - 68px) / 2), (max-width: 1199px) calc((100vw - 104px) / 3), (max-width: 1248px) calc((100vw - 132px) / 4), 267px"><img class="card__image" src="image/baked-rolls.jpg" alt="Запечённые роллы" loading="lazy" decoding="async" width="800" height="533"></picture>
+                        </div>
+                        <div class="card__body">
+                            <div class="card__title-row">
+                                <h3 class="card__title">Запечённые роллы</h3>
+                                <span class="card__weight">300 г</span>
+                            </div>
+                            <div class="card__rating"><span class="stars">★★★★★</span><span>4.7</span><span>·</span><span>64 отзыва</span></div>
+                            <p class="card__desc">Под сырной шапкой — нежная начинка из лосося и краба.</p>
+                            <div class="card__footer" data-card-footer></div>
+                        </div>
+                    </div>
+                    <div class="card" data-category="rolls" data-price="520" data-name="Ролл Калифорния" data-id="california">
+                        <div class="card__image-wrap">
+                            <picture><source type="image/webp" srcset="image/optimized/california-rolls-320.webp 320w, image/optimized/california-rolls-640.webp 640w, image/optimized/california-rolls-800.webp 800w" sizes="(max-width: 575px) calc(100vw - 32px), (max-width: 899px) calc((100vw - 68px) / 2), (max-width: 1199px) calc((100vw - 104px) / 3), (max-width: 1248px) calc((100vw - 132px) / 4), 267px"><img class="card__image" src="image/california-rolls.jpg" alt="Ролл Калифорния" loading="lazy" decoding="async" width="800" height="640"></picture>
+                        </div>
+                        <div class="card__body">
+                            <div class="card__title-row">
+                                <h3 class="card__title">Ролл Калифорния</h3>
+                                <span class="card__weight">270 г</span>
+                            </div>
+                            <div class="card__rating"><span class="stars">★★★★★</span><span>4.9</span><span>·</span><span>112 отзывов</span></div>
+                            <p class="card__desc">Краб, авокадо и икра тобико — нежное сочетание вкусов.</p>
+                            <div class="card__footer" data-card-footer></div>
+                        </div>
+                    </div>
+                    <div class="card" data-category="pizza" data-price="599" data-name="Пицца Пепперони" data-id="pepperoni">
+                        <div class="card__image-wrap">
+                            <picture><source type="image/webp" srcset="image/optimized/pepperoni-pizza-320.webp 320w, image/optimized/pepperoni-pizza-640.webp 640w, image/optimized/pepperoni-pizza-800.webp 800w" sizes="(max-width: 575px) calc(100vw - 32px), (max-width: 899px) calc((100vw - 68px) / 2), (max-width: 1199px) calc((100vw - 104px) / 3), (max-width: 1248px) calc((100vw - 132px) / 4), 267px"><img class="card__image" src="image/pepperoni-pizza.jpg" alt="Пицца Пепперони" loading="lazy" decoding="async" width="800" height="533"></picture>
+                        </div>
+                        <div class="card__body">
+                            <div class="card__title-row">
+                                <h3 class="card__title">Пицца Пепперони</h3>
+                                <span class="card__weight">550 г</span>
+                            </div>
+                            <div class="card__rating"><span class="stars">★★★★★</span><span>4.8</span><span>·</span><span>95 отзывов</span></div>
+                            <p class="card__desc">Тонкое тесто, тягучая моцарелла и пикантная пепперони.</p>
+                            <div class="card__footer" data-card-footer></div>
+                        </div>
+                    </div>
+                    <div class="card" data-category="pizza" data-price="549" data-name="Пицца Маргарита" data-id="margherita">
+                        <div class="card__image-wrap">
+                            <div class="card__badges"><span class="card__badge card__badge--sale">−15%</span></div>
+                            <picture><source type="image/webp" srcset="image/optimized/margherita-pizza-320.webp 320w, image/optimized/margherita-pizza-640.webp 640w, image/optimized/margherita-pizza-800.webp 800w" sizes="(max-width: 575px) calc(100vw - 32px), (max-width: 899px) calc((100vw - 68px) / 2), (max-width: 1199px) calc((100vw - 104px) / 3), (max-width: 1248px) calc((100vw - 132px) / 4), 267px"><img class="card__image" src="image/margherita-pizza.jpg" alt="Пицца Маргарита" loading="lazy" decoding="async" width="800" height="533"></picture>
+                        </div>
+                        <div class="card__body">
+                            <div class="card__title-row">
+                                <h3 class="card__title">Пицца Маргарита</h3>
+                                <span class="card__weight">480 г</span>
+                            </div>
+                            <div class="card__rating"><span class="stars">★★★★★</span><span>4.9</span><span>·</span><span>74 отзыва</span></div>
+                            <p class="card__desc">Итальянская классика: томаты, моцарелла и свежий базилик.</p>
+                            <div class="card__footer" data-card-footer></div>
+                        </div>
+                    </div>
+                    <div class="card" data-category="pizza" data-price="649" data-name="Пицца 4 сыра" data-id="four-cheese">
+                        <div class="card__image-wrap">
+                            <picture><source type="image/webp" srcset="image/optimized/four-cheese-pizza-320.webp 320w, image/optimized/four-cheese-pizza-640.webp 640w, image/optimized/four-cheese-pizza-800.webp 800w" sizes="(max-width: 575px) calc(100vw - 32px), (max-width: 899px) calc((100vw - 68px) / 2), (max-width: 1199px) calc((100vw - 104px) / 3), (max-width: 1248px) calc((100vw - 132px) / 4), 267px"><img class="card__image" src="image/four-cheese-pizza.jpg" alt="Пицца 4 сыра" loading="lazy" decoding="async" width="800" height="534"></picture>
+                        </div>
+                        <div class="card__body">
+                            <div class="card__title-row">
+                                <h3 class="card__title">Пицца 4 сыра</h3>
+                                <span class="card__weight">520 г</span>
+                            </div>
+                            <div class="card__rating"><span class="stars">★★★★★</span><span>4.8</span><span>·</span><span>56 отзывов</span></div>
+                            <p class="card__desc">Моцарелла, пармезан, горгонзола и чеддер — для гурманов.</p>
+                            <div class="card__footer" data-card-footer></div>
+                        </div>
+                    </div>
+                    <div class="card" data-category="soup" data-price="290" data-name="Мисо-суп" data-id="miso">
+                        <div class="card__image-wrap">
+                            <picture><source type="image/webp" srcset="image/optimized/miso-soup-320.webp 320w, image/optimized/miso-soup-640.webp 640w, image/optimized/miso-soup-800.webp 800w" sizes="(max-width: 575px) calc(100vw - 32px), (max-width: 899px) calc((100vw - 68px) / 2), (max-width: 1199px) calc((100vw - 104px) / 3), (max-width: 1248px) calc((100vw - 132px) / 4), 267px"><img class="card__image" src="image/miso-soup.jpg" alt="Мисо-суп" loading="lazy" decoding="async" width="800" height="533"></picture>
+                        </div>
+                        <div class="card__body">
+                            <div class="card__title-row">
+                                <h3 class="card__title">Мисо-суп</h3>
+                                <span class="card__weight">300 мл</span>
+                            </div>
+                            <div class="card__rating"><span class="stars">★★★★☆</span><span>4.6</span><span>·</span><span>42 отзыва</span></div>
+                            <p class="card__desc">Традиционный японский суп с тофу, водорослями и зелёным луком.</p>
+                            <div class="card__footer" data-card-footer></div>
+                        </div>
+                    </div>
+                    <div class="card" data-category="desserts" data-price="320" data-name="Чизкейк Нью-Йорк" data-id="cheesecake">
+                        <div class="card__image-wrap">
+                            <picture><source type="image/webp" srcset="image/optimized/cheesecake-320.webp 320w, image/optimized/cheesecake-640.webp 640w, image/optimized/cheesecake-800.webp 800w" sizes="(max-width: 575px) calc(100vw - 32px), (max-width: 899px) calc((100vw - 68px) / 2), (max-width: 1199px) calc((100vw - 104px) / 3), (max-width: 1248px) calc((100vw - 132px) / 4), 267px"><img class="card__image" src="image/cheesecake.jpg" alt="Чизкейк Нью-Йорк" loading="lazy" decoding="async" width="800" height="533"></picture>
+                        </div>
+                        <div class="card__body">
+                            <div class="card__title-row">
+                                <h3 class="card__title">Чизкейк Нью-Йорк</h3>
+                                <span class="card__weight">150 г</span>
+                            </div>
+                            <div class="card__rating"><span class="stars">★★★★★</span><span>4.9</span><span>·</span><span>67 отзывов</span></div>
+                            <p class="card__desc">Нежный сливочный вкус на песочной основе. Идеален с чаем.</p>
+                            <div class="card__footer" data-card-footer></div>
+                        </div>
+                    </div>
+                    <div class="card" data-category="drinks" data-price="150" data-name="Кола 0.5 л" data-id="cola">
+                        <div class="card__image-wrap">
+                            <picture><source type="image/webp" srcset="image/optimized/cola-320.webp 320w, image/optimized/cola-640.webp 640w, image/optimized/cola-800.webp 800w" sizes="(max-width: 575px) calc(100vw - 32px), (max-width: 899px) calc((100vw - 68px) / 2), (max-width: 1199px) calc((100vw - 104px) / 3), (max-width: 1248px) calc((100vw - 132px) / 4), 267px"><img class="card__image" src="image/cola.jpg" alt="Кола 0.5 л" loading="lazy" decoding="async" width="800" height="1000"></picture>
+                        </div>
+                        <div class="card__body">
+                            <div class="card__title-row">
+                                <h3 class="card__title">Кола 0.5 л</h3>
+                                <span class="card__weight">500 мл</span>
+                            </div>
+                            <div class="card__rating"><span class="stars">★★★★☆</span><span>4.5</span><span>·</span><span>31 отзыв</span></div>
+                            <p class="card__desc">Классическая охлаждённая кола. Отлично утоляет жажду.</p>
+                            <div class="card__footer" data-card-footer></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cart__empty" id="emptySearch" style="display:none; padding-top: 40px;">
+                    <div class="cart__empty-icon">🔍</div>
+                    <h4>Ничего не найдено</h4>
+                    <p>Попробуйте изменить запрос или категорию</p>
+                    <button class="btn btn--outline" id="resetSearch">Сбросить фильтры</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section--compact" id="promo">
+            <div class="container">
+                <div class="section__header anim">
+                    <h2 class="section__title">Акции и спецпредложения</h2>
+                    <p class="section__subtitle">Экономьте на любимых блюдах с нашими выгодными предложениями</p>
+                </div>
+                <div class="promo-grid">
+                    <div class="promo-card anim">
+                        <picture><source type="image/webp" srcset="image/optimized/baked-rolls-320.webp 320w, image/optimized/baked-rolls-640.webp 640w, image/optimized/baked-rolls-800.webp 800w" sizes="(max-width: 600px) calc(100vw - 32px), (max-width: 992px) 640px, 560px"><img src="image/baked-rolls.jpg" alt="Сет Токио" loading="lazy" decoding="async" width="800" height="533"></picture>
+                        <div class="promo-card__content">
+                            <span class="promo-card__tag">🔥 Хит продаж</span>
+                            <h3>Сет «Токио»</h3>
+                            <p>40 кусочков разных роллов всего за 1290 ₽ вместо 1690 ₽</p>
+                        </div>
+                    </div>
+                    <div class="promo-card anim">
+                        <picture><source type="image/webp" srcset="image/optimized/pepperoni-pizza-320.webp 320w, image/optimized/pepperoni-pizza-640.webp 640w, image/optimized/pepperoni-pizza-800.webp 800w" sizes="(max-width: 600px) calc(100vw - 32px), (max-width: 992px) 640px, 560px"><img src="image/pepperoni-pizza.jpg" alt="Пицца в подарок" loading="lazy" decoding="async" width="800" height="533"></picture>
+                        <div class="promo-card__content">
+                            <span class="promo-card__tag">🎁 Подарок</span>
+                            <h3>Пицца в подарок</h3>
+                            <p>При заказе от 2000 ₽ — пицца «Маргарита» бесплатно</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="features">
+            <div class="features anim">
+                <div class="container">
+                    <div class="features__grid">
+                        <div class="feature">
+                            <span class="feature__icon" aria-hidden="true">⚡</span>
+                            <h3 class="feature__title">Быстрая доставка</h3>
+                            <p class="feature__text">Привозим за 60 минут или быстрее. В Якутске работаем круглосуточно.</p>
+                        </div>
+                        <div class="feature">
+                            <span class="feature__icon" aria-hidden="true">🍣</span>
+                            <h3 class="feature__title">Свежие ингредиенты</h3>
+                            <p class="feature__text">Готовим из продуктов высшего качества. Рыба и морепродукты — ежедневные поставки.</p>
+                        </div>
+                        <div class="feature">
+                            <span class="feature__icon" aria-hidden="true">🕐</span>
+                            <h3 class="feature__title">Работаем 24/7</h3>
+                            <p class="feature__text">Принимаем заказы в любое время дня и ночи. Даже когда все спят.</p>
+                        </div>
+                        <div class="feature">
+                            <span class="feature__icon" aria-hidden="true">💳</span>
+                            <h3 class="feature__title">Удобная оплата</h3>
+                            <p class="feature__text">Оплачивайте картой, наличными или онлайн. Без скрытых комиссий.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section--compact">
+            <div class="stats anim">
+                <div class="stat"><div class="stat__num">10+</div><div class="stat__label">лет на рынке</div></div>
+                <div class="stat"><div class="stat__num">50K+</div><div class="stat__label">довольных клиентов</div></div>
+                <div class="stat"><div class="stat__num">60</div><div class="stat__label">минут доставка</div></div>
+                <div class="stat"><div class="stat__num">24/7</div><div class="stat__label">работаем для вас</div></div>
+            </div>
+        </section>
+
+        <section class="section" id="reviews">
+            <div class="container">
+                <div class="section__header anim">
+                    <h2 class="section__title">Отзывы наших гостей</h2>
+                    <p class="section__subtitle">Более 5000 положительных отзывов на картах и в соцсетях</p>
+                </div>
+                <div class="reviews-grid">
+                    <div class="review anim">
+                        <div class="review__head">
+                            <div class="review__avatar">АК</div>
+                            <div>
+                                <div class="review__name">Анна К.</div>
+                                <div class="review__stars" aria-label="5 из 5 звёзд">★★★★★</div>
+                            </div>
+                        </div>
+                        <p class="review__text">Заказываю роллы тут уже второй год. Всегда свежие, привозят быстро, курьеры вежливые. Филадельфия — просто топ!</p>
+                        <div class="review__date">2 дня назад</div>
+                    </div>
+                    <div class="review anim">
+                        <div class="review__head">
+                            <div class="review__avatar">ДС</div>
+                            <div>
+                                <div class="review__name">Дмитрий С.</div>
+                                <div class="review__stars" aria-label="5 из 5 звёзд">★★★★★</div>
+                            </div>
+                        </div>
+                        <p class="review__text">Пицца «4 сыра» — огонь! Заказывали ночью, привезли за 40 минут. Приятно, что работают круглосуточно. Рекомендую.</p>
+                        <div class="review__date">неделю назад</div>
+                    </div>
+                    <div class="review anim">
+                        <div class="review__head">
+                            <div class="review__avatar">МП</div>
+                            <div>
+                                <div class="review__name">Мария П.</div>
+                                <div class="review__stars" aria-label="5 из 5 звёзд">★★★★★</div>
+                            </div>
+                        </div>
+                        <p class="review__text">Сет «Токио» — это что-то! Хватило на всю семью. Очень удобное приложение, оплата онлайн. Спасибо FOOD BOOM!</p>
+                        <div class="review__date">3 дня назад</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="faq">
+            <div class="container">
+                <div class="section__header anim">
+                    <h2 class="section__title">Частые вопросы</h2>
+                    <p class="section__subtitle">Всё, что важно знать перед заказом</p>
+                </div>
+                <div class="faq anim">
+                    <details class="faq-item">
+                        <summary>Сколько идёт доставка?</summary>
+                        <p>В среднем 45–60 минут по Якутску. В часы пик (19:00–22:00) время может увеличиться до 90 минут. Точное время курьер сообщит по телефону после оформления заказа.</p>
+                    </details>
+                    <details class="faq-item">
+                        <summary>Работаете ли вы ночью?</summary>
+                        <p>Да, мы работаем круглосуточно 24/7 без выходных. Заказывать можно в любое время дня и ночи.</p>
+                    </details>
+                    <details class="faq-item">
+                        <summary>Есть ли минимальная сумма заказа?</summary>
+                        <p>Минимальная сумма заказа — 500 ₽. При заказе от 1500 ₽ доставка бесплатная, иначе — 200 ₽.</p>
+                    </details>
+                    <details class="faq-item">
+                        <summary>Как можно оплатить заказ?</summary>
+                        <p>Мы принимаем оплату банковской картой онлайн, через СБП (QR-код), наличными или картой курьеру при получении. Никаких скрытых комиссий.</p>
+                    </details>
+                    <details class="faq-item">
+                        <summary>Можно ли забрать заказ самому?</summary>
+                        <p>Конечно! Вы можете забрать заказ по адресу: ул. Дежнева, 57, 3 этаж. Самовывоз всегда без комиссии и обычно готов быстрее доставки.</p>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section--compact">
+            <div class="container">
+                <div class="section__header anim">
+                    <h2 class="section__title">Готовим с любовью</h2>
+                    <p class="section__subtitle">Наши блюда в деталях — чтобы вы знали, что получите</p>
+                </div>
+                <div class="gallery">
+                    <picture><source type="image/webp" srcset="image/optimized/sushi-rolls-320.webp 320w, image/optimized/sushi-rolls-640.webp 640w, image/optimized/sushi-rolls-960.webp 960w, image/optimized/sushi-rolls-1200.webp 1200w" sizes="(max-width: 768px) calc((100vw - 48px) / 2), (max-width: 992px) calc((100vw - 64px) / 2), (max-width: 1248px) calc((100vw - 96px) / 4), 276px"><img src="image/sushi-rolls.jpg" alt="Суши" loading="lazy" decoding="async" width="1200" height="800"></picture>
+                    <picture><source type="image/webp" srcset="image/optimized/philadelphia-rolls-320.webp 320w, image/optimized/philadelphia-rolls-640.webp 640w, image/optimized/philadelphia-rolls-800.webp 800w" sizes="(max-width: 768px) calc((100vw - 48px) / 2), (max-width: 992px) calc((100vw - 64px) / 2), (max-width: 1248px) calc((100vw - 96px) / 4), 276px"><img src="image/philadelphia-rolls.jpg" alt="Роллы" loading="lazy" decoding="async" width="800" height="1421"></picture>
+                    <picture><source type="image/webp" srcset="image/optimized/pepperoni-pizza-320.webp 320w, image/optimized/pepperoni-pizza-640.webp 640w, image/optimized/pepperoni-pizza-800.webp 800w" sizes="(max-width: 768px) calc((100vw - 48px) / 2), (max-width: 992px) calc((100vw - 64px) / 2), (max-width: 1248px) calc((100vw - 96px) / 4), 276px"><img src="image/pepperoni-pizza.jpg" alt="Пицца" loading="lazy" decoding="async" width="800" height="533"></picture>
+                    <picture><source type="image/webp" srcset="image/optimized/baked-rolls-320.webp 320w, image/optimized/baked-rolls-640.webp 640w, image/optimized/baked-rolls-800.webp 800w" sizes="(max-width: 768px) calc((100vw - 48px) / 2), (max-width: 992px) calc((100vw - 64px) / 2), (max-width: 1248px) calc((100vw - 96px) / 4), 276px"><img src="image/baked-rolls.jpg" alt="Запечённые роллы" loading="lazy" decoding="async" width="800" height="533"></picture>
+                </div>
+            </div>
+        </section>
+
+        <!-- НОВАЯ СЕКЦИЯ: ОБРАТНАЯ СВЯЗЬ -->
+        <section class="section section--compact" id="feedback">
+            <div class="container" style="max-width: 600px;">
+                <div class="section__header anim">
+                    <h2 class="section__title">Обратная связь</h2>
+                    <p class="section__subtitle">Есть вопрос, отзыв или предложение? Напишите нам, и мы обязательно ответим!</p>
+                </div>
+                <form id="feedbackForm" class="anim" style="background: #fff; border-radius: 24px; padding: 32px; box-shadow: var(--shadow);">
+                    <div class="form-group">
+                        <label for="fbName">Ваше имя <span class="req">*</span></label>
+                        <input type="text" id="fbName" class="form-control" placeholder="Как к вам обращаться?" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="fbPhone">Телефон <span class="req">*</span></label>
+                        <input type="tel" id="fbPhone" class="form-control" placeholder="+7 (___) ___-__-__" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="fbMessage">Сообщение <span class="req">*</span></label>
+                        <textarea id="fbMessage" class="form-control" rows="4" placeholder="Ваш вопрос или предложение..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn--primary btn--block">Отправить сообщение</button>
+                </form>
+            </div>
+        </section>
+
+        <section class="section section--compact">
+            <div class="cta anim">
+                <div class="cta__inner">
+                    <h2>Голодны? Мы уже готовим!</h2>
+                    <p>Закажите сейчас — и уже через час наслаждайтесь свежими суши, горячей пиццей и другими любимыми блюдами.</p>
+                    <div class="cta__actions">
+                        <a href="#menu" class="btn btn--primary">Выбрать блюдо</a>
+                        <button class="btn btn--light" id="callOpen">📞 Заказать звонок</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer" id="contacts">
+        <div class="container">
+            <div class="footer__inner">
+                <div class="footer__brand">
+                    <a href="#" class="logo">FOOD<span>BOOM</span></a>
+                    <p>Вкусная еда с доставкой в Якутске. Работаем круглосуточно с 2016 года.</p>
+                </div>
+                <div class="footer__col">
+                    <h4>Контакты</h4>
+                    <a href="tel:+74112505707">+7 (411) 250-57-07</a>
+                    <p>ул. Дежнева, 57, 3 этаж</p>
+                    <p>Якутск, Респ. Саха (Якутия)</p>
+                </div>
+                <div class="footer__col">
+                    <h4>Режим работы</h4>
+                    <p>Пн–Вс: круглосуточно</p>
+                    <p>Доставка: 24/7</p>
+                    <p>Самовывоз: 10:00–23:00</p>
+                </div>
+                <div class="footer__col">
+                    <h4>Меню</h4>
+                    <a href="#menu">Сеты</a>
+                    <a href="#menu">Суши и роллы</a>
+                    <a href="#menu">Пицца</a>
+                    <a href="#promo">Акции</a>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p>© 2026 FOOD BOOM. Все права защищены.</p>
+                <p class="footer__legal">
+                    <a href="privacy.html">Политика конфиденциальности</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="consent.html">Согласие на обработку персональных данных</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <aside class="cart" id="cart" inert aria-label="Корзина" role="dialog" aria-modal="true">
+        <div class="cart__header">
+            <h3>Корзина</h3>
+            <button class="cart__close" id="cartClose" aria-label="Закрыть корзину">×</button>
+        </div>
+        <div class="cart__items" id="cartItems"></div>
+        <div class="cart__footer" id="cartFooter" style="display: none;">
+            <div class="cart__total">
+                <span>Итого:</span>
+                <strong id="cartTotal">0 ₽</strong>
+            </div>
+            <button class="btn btn--primary btn--block" id="checkoutBtn">Оформить заказ</button>
+        </div>
+    </aside>
+
+    <div class="mobile-cart-bar" id="mobileCartBar">
+        <div class="mobile-cart-bar__info">
+            <span class="mobile-cart-bar__count" id="mobileCartCount">0 товаров</span>
+            <span class="mobile-cart-bar__total" id="mobileCartTotal">0 ₽</span>
+        </div>
+        <button class="mobile-cart-bar__btn" id="mobileCartBtn">В корзину →</button>
+    </div>
+
+    <!-- МОДАЛЬНОЕ ОКНО ОФОРМЛЕНИЯ -->
+    <div class="modal-overlay" id="checkoutOverlay" inert>
+        <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+            <button class="modal__close" id="modalClose" aria-label="Закрыть">×</button>
+            
+            <div class="modal__body" id="authCheckStep" style="display: none; text-align: center;">
+                <div style="font-size: 48px; margin-bottom: 16px;">🛒</div>
+                <h3 class="modal__title" style="margin-bottom: 8px;">Как оформим заказ?</h3>
+                <p class="modal__subtitle" style="margin-bottom: 24px;">Войдите, чтобы копить бонусы, или продолжите как гость</p>
+                <button type="button" class="btn btn--primary btn--block" onclick="redirectToAuth('login')" style="margin-bottom: 12px;">Войти в аккаунт</button>
+                <button type="button" class="btn btn--outline btn--block" onclick="redirectToAuth('register')" style="margin-bottom: 20px;">Зарегистрироваться</button>
+                <div class="auth-divider" style="margin: 16px 0;"><span>или</span></div>
+                <button type="button" class="btn btn--light btn--block" onclick="continueAsGuest()" style="border: 2px dashed var(--primary); background: transparent; color: var(--primary);">Продолжить как гость</button>
+            </div>
+
+            <div class="modal__body" id="checkoutStep" style="display: none;">
+                <h3 class="modal__title" id="modalTitle">Оформление заказа</h3>
+                <p class="modal__subtitle" id="checkoutSubtitle">Заполните данные — и мы привезём заказ в течение 60 минут</p>
+                <form id="orderForm" novalidate autocomplete="on">
+                    <div class="form-group">
+                        <label>Способ получения</label>
+                        <div class="delivery-methods">
+                            <label class="delivery-option">
+                                <input type="radio" name="delivery" value="delivery" checked>
+                                <div class="delivery-option__content"><span aria-hidden="true">🚚</span><strong>Доставка</strong><small>60 мин</small></div>
+                            </label>
+                            <label class="delivery-option">
+                                <input type="radio" name="delivery" value="pickup">
+                                <div class="delivery-option__content"><span aria-hidden="true">🏪</span><strong>Самовывоз</strong><small>ул. Дежнева, 57</small></div>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Имя <span class="req">*</span></label>
+                        <input type="text" id="name" name="name" class="form-control" placeholder="Как к вам обращаться?" required minlength="2" autocomplete="given-name">
+                        <span class="form-hint">Укажите минимум 2 символа</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Телефон <span class="req">*</span></label>
+                        <input type="tel" id="phone" name="phone" class="form-control" placeholder="+7 (___) ___-__-__" required autocomplete="tel" inputmode="tel">
+                        <span class="form-hint">Введите номер полностью</span>
+                    </div>
+                    <div class="form-group" id="addressGroup">
+                        <label for="address">Адрес доставки <span class="req">*</span></label>
+                        <input type="text" id="address" name="address" class="form-control" placeholder="Улица, дом, квартира" required autocomplete="street-address">
+                        <span class="form-hint">Укажите улицу, дом и квартиру</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="comment">Комментарий к заказу</label>
+                        <textarea id="comment" name="comment" class="form-control" placeholder="Например: без лука, позвонить за 10 минут..." rows="2"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Способ оплаты <span class="req">*</span></label>
+                        <div class="payment-methods">
+                            <label class="payment-option">
+                                <input type="radio" name="payment" value="online-card" checked>
+                                <div class="payment-option__content">
+                                    <span class="payment-option__icon" aria-hidden="true">💳</span>
+                                    <div class="payment-option__text"><strong>Картой онлайн</strong><small>Безопасная оплата на сайте</small></div>
+                                    <span class="payment-option__check"></span>
+                                </div>
+                            </label>
+                            <label class="payment-option">
+                                <input type="radio" name="payment" value="sbp">
+                                <div class="payment-option__content">
+                                    <span class="payment-option__icon" aria-hidden="true">📱</span>
+                                    <div class="payment-option__text"><strong>СБП / QR-код</strong><small>Перевод по QR из приложения банка</small></div>
+                                    <span class="payment-option__check"></span>
+                                </div>
+                            </label>
+                            <label class="payment-option">
+                                <input type="radio" name="payment" value="cash">
+                                <div class="payment-option__content">
+                                    <span class="payment-option__icon" aria-hidden="true">💵</span>
+                                    <div class="payment-option__text"><strong>Наличными курьеру</strong><small>Оплата при получении</small></div>
+                                    <span class="payment-option__check"></span>
+                                </div>
+                            </label>
+                            <label class="payment-option">
+                                <input type="radio" name="payment" value="card-courier">
+                                <div class="payment-option__content">
+                                    <span class="payment-option__icon" aria-hidden="true">🔑</span>
+                                    <div class="payment-option__text"><strong>Картой курьеру</strong><small>Терминал при получении</small></div>
+                                    <span class="payment-option__check"></span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="promoCode">Промокод</label>
+                        <div class="promo-input-wrap">
+                            <input type="text" id="promoCode" placeholder="Введите промокод" autocomplete="off">
+                            <button type="button" id="applyPromo">Применить</button>
+                        </div>
+                        <div class="promo-message" id="promoMessage"></div>
+                        <p class="promo-hint">Попробуйте: <code>BOOM10</code> — 10% скидка</p>
+                    </div>
+                    <div class="order-summary">
+                        <div class="order-summary__row"><span>Товары</span><span id="sumItems">0 ₽</span></div>
+                        <div class="order-summary__row" id="discountRow" style="display:none"><span>Скидка</span><span id="sumDiscount">0 ₽</span></div>
+                        <div class="order-summary__row"><span>Доставка</span><span id="sumDelivery">0 ₽</span></div>
+                        <div class="order-summary__row total"><span>Итого к оплате</span><span id="sumTotal">0 ₽</span></div>
+                    </div>
+                    <div class="consent-checkbox">
+                        <input type="checkbox" id="consentCheckbox" name="consent" required>
+                        <label for="consentCheckbox">
+                            Я согласен(на) с <a href="privacy.html" target="_blank" rel="noopener">Политикой конфиденциальности</a>
+                            и даю <a href="consent.html" target="_blank" rel="noopener">согласие на обработку персональных данных</a>
+                            <span class="req">*</span>
+                        </label>
+                    </div>
+                    <span class="form-hint" id="consentHint" style="display:none; margin-bottom: 12px;">Отметьте согласие, чтобы продолжить</span>
+                    <button type="submit" class="btn btn--primary btn--block" id="submitBtn">Подтвердить заказ</button>
+                </form>
+            </div>
+
+            <div class="modal__body success" id="successStep" style="display: none;">
+                <div class="success__icon">✅</div>
+                <h3>Заказ оформлен!</h3>
+                <p>Спасибо за заказ. Мы уже начали готовить.</p>
+                <p>Номер вашего заказа:</p>
+                <div class="success__number" id="orderNumber">FB-000000</div>
+                <div class="success__eta">⏱ Ожидайте через 45–60 минут</div>
+                <p id="successInfo"></p>
+                <button class="btn btn--primary btn--block" id="successClose" style="margin-top: 16px;">Отлично, закрыть</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- МОДАЛКА ЗАКАЗА ЗВОНКА -->
+    <div class="modal-overlay" id="callModal" inert>
+        <div class="modal" role="dialog" aria-modal="true" aria-labelledby="callTitle" style="max-width: 400px;">
+            <button class="modal__close" id="callClose" aria-label="Закрыть">×</button>
+            <div class="modal__body">
+                <h3 class="modal__title" id="callTitle">Заказать звонок</h3>
+                <p class="modal__subtitle" style="margin-bottom: 16px;">Оставьте номер, и мы перезвоним через 5 минут.</p>
+                <form id="callForm">
+                    <div class="form-group">
+                        <input type="text" id="callName" autocomplete="name" aria-label="Ваше имя" class="form-control" placeholder="Ваше имя" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" id="callPhone" autocomplete="tel" inputmode="tel" aria-label="Номер телефона" class="form-control" placeholder="+7 (___) ___-__-__" required>
+                    </div>
+                    <button type="submit" class="btn btn--primary btn--block">Жду звонка</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite">
+        <span aria-hidden="true">✓</span>
+        <span id="toastText">Добавлено в корзину</span>
+    </div>
+
+    <script src="script.js?v=20261109" defer></script>
+</body>
+</html>

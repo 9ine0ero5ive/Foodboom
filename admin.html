@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Админ-панель — FOOD BOOM</title>
+    <link rel="stylesheet" href="style.css?v=20261109">
+    <style>
+        body { background: #f4f7f6; font-family: 'Open Sans', sans-serif; margin: 0; }
+        .admin-layout { display: flex; min-height: 100vh; }
+        
+        .sidebar { width: 260px; background: #2d1b12; color: #fff; display: flex; flex-direction: column; position: fixed; height: 100vh; z-index: 10; }
+        .sidebar__logo { padding: 24px; font-family: 'Montserrat', sans-serif; font-size: 24px; font-weight: 800; border-bottom: 1px solid rgba(255,255,255,0.1); color: #fff; text-decoration: none; }
+        .sidebar__logo span { color: #ff5e1a; }
+        .sidebar__nav { padding: 20px 0; flex: 1; overflow-y: auto; }
+        .sidebar__link { display: flex; align-items: center; gap: 12px; padding: 14px 24px; color: rgba(255,255,255,0.7); text-decoration: none; font-weight: 600; font-size: 15px; cursor: pointer; transition: 0.2s; border-left: 4px solid transparent; }
+        .sidebar__link:hover, .sidebar__link.active { background: rgba(255,255,255,0.05); color: #ff5e1a; border-left-color: #ff5e1a; }
+        .sidebar__footer { padding: 24px; border-top: 1px solid rgba(255,255,255,0.1); }
+        .sidebar__footer button { width: 100%; background: rgba(255,255,255,0.1); color: #fff; border: none; padding: 12px; border-radius: 8px; cursor: pointer; font-weight: 600; transition: 0.2s; }
+        .sidebar__footer button:hover { background: #e74c3c; }
+
+        .main-content { flex: 1; margin-left: 260px; padding: 32px; }
+        .page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+        .page-title { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 800; color: #2d1b12; margin: 0; }
+        
+        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 32px; }
+        .stat-card { background: #fff; border-radius: 16px; padding: 24px; box-shadow: 0 4px 16px rgba(0,0,0,0.04); border-left: 4px solid #ff5e1a; }
+        .stat-card__title { font-size: 13px; color: #888; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+        .stat-card__num { font-size: 32px; font-family: 'Montserrat', sans-serif; font-weight: 800; color: #2d1b12; }
+        .stat-card__num span { font-size: 20px; color: #ff5e1a; }
+
+        .admin-card { background: #fff; border-radius: 16px; padding: 24px; box-shadow: 0 4px 16px rgba(0,0,0,0.04); margin-bottom: 24px; }
+        .toolbar { display: flex; gap: 16px; margin-bottom: 20px; }
+        .toolbar input, .toolbar select { padding: 10px 16px; border: 1px solid #ddd; border-radius: 8px; font-family: 'Open Sans', sans-serif; outline: none; font-size: 14px; }
+        
+        .admin-table { width: 100%; border-collapse: collapse; }
+        .admin-table th, .admin-table td { padding: 16px; text-align: left; border-bottom: 1px solid #eee; font-size: 14px; }
+        .admin-table th { background: #faf8f5; font-weight: 700; color: #555; text-transform: uppercase; font-size: 12px; letter-spacing: 0.5px; }
+        .admin-table tr:hover { background: #faf8f5; }
+        
+        .badge { display: inline-block; padding: 4px 10px; border-radius: 50px; font-size: 11px; font-weight: 700; }
+        .badge-admin { background: #e8f5e9; color: #2e7d32; }
+        .badge-role { background: #f3e5f5; color: #7b1fa2; }
+        .badge-user { background: #e3f2fd; color: #1565c0; }
+        
+        .status-select { padding: 6px 12px; border-radius: 8px; border: 1px solid #ddd; font-size: 13px; font-weight: 700; cursor: pointer; outline: none; }
+        .status-new { background: #fff3e0; color: #e65100; border-color: #ffe0b2; }
+        .status-cooking { background: #e3f2fd; color: #1565c0; border-color: #bbdefb; }
+        .status-delivery { background: #f3e5f5; color: #7b1fa2; border-color: #e1bee7; }
+        .status-done { background: #e8f5e9; color: #2e7d32; border-color: #c8e6c9; }
+
+        .btn-icon { background: none; border: none; cursor: pointer; font-size: 18px; padding: 4px; border-radius: 6px; transition: 0.2s; }
+        .btn-icon:hover { background: #eee; }
+        
+        .modal-admin { position: fixed; inset: 0; background: rgba(0,0,0,0.5); display: none; align-items: center; justify-content: center; z-index: 1000; }
+        .modal-admin.show { display: flex; }
+        .modal-admin__content { background: #fff; width: 100%; max-width: 500px; border-radius: 16px; padding: 32px; position: relative; }
+        .modal-admin__close { position: absolute; top: 16px; right: 16px; background: none; border: none; font-size: 24px; cursor: pointer; color: #888; }
+        
+        .detail-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px dashed #eee; }
+        .detail-row:last-child { border-bottom: none; }
+        .detail-label { color: #888; font-size: 14px; }
+        .detail-value { font-weight: 600; color: #2d1b12; font-size: 14px; text-align: right; }
+
+        .login-wrap { display: flex; align-items: center; justify-content: center; min-height: 100vh; background: #f4f7f6; }
+        .login-box { background: #fff; padding: 40px; border-radius: 16px; box-shadow: 0 8px 32px rgba(0,0,0,0.08); width: 100%; max-width: 400px; text-align: center; }
+        
+        @media (max-width: 992px) {
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .sidebar { width: 70px; }
+            .sidebar__logo, .sidebar__link span { display: none; }
+            .sidebar__link { justify-content: center; padding: 16px; }
+            .main-content { margin-left: 70px; }
+        }
+        @media (max-width: 768px) {
+            .toolbar { flex-direction: column; }
+            .admin-table { display: block; overflow-x: auto; }
+        }
+
+        /* Keep wide tables inside the available content width. */
+        .main-content, .admin-card { min-width: 0; }
+        .admin-card { max-width: 100%; }
+        .table-scroll { max-width: 100%; overflow-x: auto; overscroll-behavior-x: contain; }
+        .admin-table { display: table; min-width: 640px; }
+        .page-header { gap: 16px; flex-wrap: wrap; }
+        .page-title { font-size: clamp(22px, 3vw, 28px); overflow-wrap: anywhere; }
+        .stat-card { min-width: 0; }
+        .stat-card__num { font-size: clamp(22px, 3vw, 32px); overflow-wrap: anywhere; }
+        .login-wrap { padding: 24px 16px; min-height: 100svh; }
+        .login-box { padding: 32px 24px; }
+        .toolbar input, .toolbar select, .status-select { min-width: 0; font-size: 16px; }
+        .btn-icon { min-width: 44px; min-height: 44px; }
+        .modal-admin { padding: 20px 12px; }
+        .modal-admin__content { max-height: calc(100dvh - 40px); overflow-y: auto; overscroll-behavior: contain; padding: 32px 24px; }
+        .modal-admin__close { min-width: 44px; min-height: 44px; top: 8px; right: 8px; }
+        .modal-admin__content h3 { padding-right: 32px; }
+        .detail-row { gap: 12px; }
+        .detail-value { min-width: 0; overflow-wrap: anywhere; }
+        .sidebar { height: 100dvh; }
+        @media (min-width: 769px) and (max-width: 992px) {
+            .sidebar__link span:first-child { display: inline; }
+            .sidebar__footer { padding: 12px 4px; }
+        }
+        @media (max-width: 768px) {
+            .admin-layout { flex-direction: column; }
+            .sidebar { position: static; width: 100%; height: auto; }
+            .sidebar__logo { display: block; padding: 16px; }
+            .sidebar__nav { display: flex; flex: none; padding: 8px; gap: 4px; overflow-x: auto; }
+            .sidebar__link { flex: 0 0 auto; flex-direction: column; gap: 4px; padding: 8px 12px; border-left: 0; border-bottom: 3px solid transparent; font-size: 12px; }
+            .sidebar__link.active { border-bottom-color: #ff5e1a; }
+            .sidebar__link span { display: inline; }
+            .sidebar__footer { padding: 8px 16px 12px; }
+            .sidebar__footer button { min-height: 44px; }
+            .main-content { width: 100%; margin-left: 0; padding: 24px 16px; }
+            .admin-card { padding: 16px; }
+            .stats-grid { gap: 12px; }
+            .stat-card { padding: 16px; }
+            .admin-table th, .admin-table td { padding: 12px; }
+        }
+        @media (max-width: 380px) { .stats-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+<div id="loginSection" class="login-wrap">
+    <div class="login-box">
+        <h2 style="font-family: 'Montserrat'; margin-bottom: 24px; color: #2d1b12;">FOOD BOOM <span style="color:#ff5e1a">ADMIN</span></h2>
+        <div class="form-group" style="text-align: left;">
+            <label style="font-size:13px; color:#555;">Email или Логин</label>
+            <input type="text" id="adminLogin" class="form-control" placeholder="admin">
+        </div>
+        <div class="form-group" style="text-align: left;">
+            <label style="font-size:13px; color:#555;">Пароль</label>
+            <input type="password" id="adminPass" class="form-control" placeholder="123">
+        </div>
+        <button class="btn btn--primary btn--block" onclick="loginAdmin()" style="margin-top: 16px;">Войти в систему</button>
+        <a href="index.html" style="display:block; margin-top: 16px; color:#888; font-size:14px; text-decoration:none;">← Вернуться на сайт</a>
+    </div>
+</div>
+
+<div id="dashboardSection" class="admin-layout" style="display: none;">
+    <aside class="sidebar">
+        <a href="index.html" class="sidebar__logo">FOOD<span>BOOM</span></a>
+        <nav class="sidebar__nav">
+            <!-- Дашборд только для Админа -->
+            <div class="sidebar__link active" data-role="admin" onclick="switchTab('dashboard', this)" role="button" tabindex="0">
+                <span style="font-size:20px;">📊</span> <span>Дашборд</span>
+            </div>
+            <!-- Заказы для Админа и Оператора -->
+            <div class="sidebar__link" data-role="admin,operator" onclick="switchTab('orders', this)" role="button" tabindex="0">
+                <span style="font-size:20px;">🧾</span> <span>Заказы</span>
+            </div>
+            <!-- Заявки для Админа и Оператора -->
+            <div class="sidebar__link" data-role="admin,operator" onclick="switchTab('requests', this)" role="button" tabindex="0">
+                <span style="font-size:20px;">📞</span> <span>Заявки</span>
+            </div>
+            <!-- Новости для Админа и Редактора -->
+            <div class="sidebar__link" data-role="admin,editor" onclick="switchTab('news', this)" role="button" tabindex="0">
+                <span style="font-size:20px;">📰</span> <span>Новости</span>
+            </div>
+            <!-- Пользователи только для Админа -->
+            <div class="sidebar__link" data-role="admin" onclick="switchTab('users', this)" role="button" tabindex="0">
+                <span style="font-size:20px;">👥</span> <span>Пользователи</span>
+            </div>
+        </nav>
+        <div class="sidebar__footer">
+            <button onclick="logoutAdmin()">Выйти</button>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <!-- ДАШБОРД -->
+        <div id="tab-dashboard" class="tab-content">
+            <div class="page-header">
+                <h1 class="page-title">Обзор магазина</h1>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-card" style="border-left-color: #1565c0;">
+                    <div class="stat-card__title">Всего заказов</div>
+                    <div class="stat-card__num" id="statOrders">0</div>
+                </div>
+                <div class="stat-card" style="border-left-color: #2e7d32;">
+                    <div class="stat-card__title">Выручка</div>
+                    <div class="stat-card__num" id="statRevenue">0 <span>₽</span></div>
+                </div>
+                <div class="stat-card" style="border-left-color: #e65100;">
+                    <div class="stat-card__title">Заявок</div>
+                    <div class="stat-card__num" id="statRequests">0</div>
+                </div>
+                <div class="stat-card" style="border-left-color: #7b1fa2;">
+                    <div class="stat-card__title">Новостей</div>
+                    <div class="stat-card__num" id="statNews">0</div>
+                </div>
+            </div>
+            <div class="admin-card">
+                <h3 style="margin-bottom: 16px;">Последние 5 заказов</h3>
+                <div class="table-scroll" tabindex="0" role="region" aria-label="Таблица; прокрутите горизонтально для просмотра всех столбцов"><table class="admin-table">
+                    <thead><tr><th>ID</th><th>Дата</th><th>Клиент</th><th>Сумма</th><th>Статус</th></tr></thead>
+                    <tbody id="recentOrdersBody"></tbody>
+                </table></div>
+            </div>
+        </div>
+
+        <!-- ЗАКАЗЫ -->
+        <div id="tab-orders" class="tab-content" style="display: none;">
+            <div class="page-header"><h1 class="page-title">Управление заказами</h1></div>
+            <div class="admin-card">
+                <div class="toolbar">
+                    <input type="text" id="orderSearch" placeholder="Поиск по имени или телефону..." oninput="renderOrders()" style="flex: 1;">
+                </div>
+                <div class="table-scroll" tabindex="0" role="region" aria-label="Таблица; прокрутите горизонтально для просмотра всех столбцов"><table class="admin-table">
+                    <thead><tr><th>№</th><th>Дата</th><th>Клиент</th><th>Сумма</th><th>Статус</th><th>Действия</th></tr></thead>
+                    <tbody id="ordersTableBody"></tbody>
+                </table></div>
+            </div>
+        </div>
+
+        <!-- ЗАЯВКИ -->
+        <div id="tab-requests" class="tab-content" style="display: none;">
+            <div class="page-header"><h1 class="page-title">Обратные звонки</h1></div>
+            <div class="admin-card">
+                <div class="table-scroll" tabindex="0" role="region" aria-label="Таблица; прокрутите горизонтально для просмотра всех столбцов"><table class="admin-table">
+                    <thead><tr><th>Дата</th><th>Имя</th><th>Телефон</th><th>Комментарий</th><th>Статус</th><th>Действия</th></tr></thead>
+                    <tbody id="requestsTableBody"></tbody>
+                </table></div>
+            </div>
+        </div>
+
+        <!-- НОВОСТИ -->
+        <div id="tab-news" class="tab-content" style="display: none;">
+            <div class="page-header">
+                <h1 class="page-title">Управление блогом</h1>
+                <button class="btn btn--primary" onclick="openNewsModal()">+ Добавить новость</button>
+            </div>
+            <div class="admin-card">
+                <div class="table-scroll" tabindex="0" role="region" aria-label="Таблица; прокрутите горизонтально для просмотра всех столбцов"><table class="admin-table">
+                    <thead><tr><th>Дата</th><th>Заголовок</th><th>Текст</th><th>Действия</th></tr></thead>
+                    <tbody id="newsTableBody"></tbody>
+                </table></div>
+            </div>
+        </div>
+
+        <!-- ПОЛЬЗОВАТЕЛИ -->
+        <div id="tab-users" class="tab-content" style="display: none;">
+            <div class="page-header">
+                <h1 class="page-title">База пользователей</h1>
+                <button class="btn btn--primary" onclick="openUserModal()">+ Создать пользователя</button>
+            </div>
+            <div class="admin-card">
+                <div class="table-scroll" tabindex="0" role="region" aria-label="Таблица; прокрутите горизонтально для просмотра всех столбцов"><table class="admin-table">
+                    <thead><tr><th>Имя</th><th>Email</th><th>Телефон</th><th>Роль</th><th>Действия</th></tr></thead>
+                    <tbody id="usersTableBody"></tbody>
+                </table></div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<!-- МОДАЛКА ДОБАВЛЕНИЯ НОВОСТИ -->
+<div class="modal-admin" id="newsModal">
+    <div class="modal-admin__content">
+        <button class="modal-admin__close" onclick="closeNewsModal()">×</button>
+        <h3 style="margin-bottom: 20px; font-family: 'Montserrat';">Новая новость</h3>
+        <div class="form-group">
+            <label>Заголовок</label>
+            <input type="text" id="newsTitle" class="form-control" placeholder="Заголовок">
+        </div>
+        <div class="form-group">
+            <label>Текст новости</label>
+            <textarea id="newsContent" class="form-control" rows="5" placeholder="Текст..."></textarea>
+        </div>
+        <button class="btn btn--primary btn--block" onclick="saveNews()">Опубликовать</button>
+    </div>
+</div>
+
+<!-- МОДАЛКА СОЗДАНИЯ ПОЛЬЗОВАТЕЛЯ -->
+<div class="modal-admin" id="userModal">
+    <div class="modal-admin__content">
+        <button class="modal-admin__close" onclick="closeUserModal()">×</button>
+        <h3 style="margin-bottom: 20px; font-family: 'Montserrat';">Создать пользователя</h3>
+        <div class="form-group"><label>Имя</label><input type="text" id="newUserName" class="form-control"></div>
+        <div class="form-group"><label>Email</label><input type="email" id="newUserEmail" class="form-control"></div>
+        <div class="form-group"><label>Телефон</label><input type="text" id="newUserPhone" class="form-control"></div>
+        <div class="form-group"><label>Пароль</label><input type="password" id="newUserPass" class="form-control"></div>
+        <div class="form-group">
+            <label>Роль</label>
+            <select id="newUserRole" class="form-control">
+                <option value="user">Клиент</option>
+                <option value="operator">Оператор</option>
+                <option value="editor">Редактор</option>
+                <option value="admin">Администратор</option>
+            </select>
+        </div>
+        <button class="btn btn--primary btn--block" onclick="saveNewUser()">Создать</button>
+    </div>
+</div>
+
+<!-- МОДАЛКА ДЕТАЛЕЙ ЗАКАЗА -->
+<div class="modal-admin" id="orderModal">
+    <div class="modal-admin__content">
+        <button class="modal-admin__close" onclick="closeOrderModal()">×</button>
+        <h3 style="margin-bottom: 20px; font-family: 'Montserrat';">Детали заказа <span id="modalOrderId" style="color:#ff5e1a"></span></h3>
+        <div class="detail-row"><span class="detail-label">Клиент:</span><span class="detail-value" id="modalOrderName"></span></div>
+        <div class="detail-row"><span class="detail-label">Телефон:</span><span class="detail-value" id="modalOrderPhone"></span></div>
+        <div class="detail-row"><span class="detail-label">Адрес:</span><span class="detail-value" id="modalOrderAddress"></span></div>
+        <div class="detail-row"><span class="detail-label">Оплата:</span><span class="detail-value" id="modalOrderPayment"></span></div>
+        <h4 style="margin: 20px 0 10px; font-family: 'Montserrat';">Состав:</h4>
+        <ul id="modalOrderItems" style="padding-left: 20px; color: #555; font-size: 14px; margin-bottom: 20px;"></ul>
+        <div class="detail-row" style="border-top: 2px solid #eee; padding-top: 16px;">
+            <span class="detail-label" style="font-size: 16px; font-weight: 700;">Итого:</span>
+            <span class="detail-value" id="modalOrderTotal" style="font-size: 20px; color: #ff5e1a;"></span>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.querySelectorAll('.sidebar__link').forEach(link => {
+        link.addEventListener('keydown', event => {
+            if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); link.click(); }
+        });
+        link.setAttribute('aria-label', link.lastElementChild.textContent.trim());
+    });
+    let allOrders = [], allUsers = [], allRequests = [], allNews = [];
+    let currentRole = '';
+    let currentUserData = null;
+
+    // Хэширование пароля
+    async function hashPassword(password) {
+        const salted = password + '|foodboom-salt-v1';
+        if (window.crypto && window.crypto.subtle) {
+            try {
+                const enc = new TextEncoder();
+                const data = enc.encode(salted);
+                const hash = await crypto.subtle.digest('SHA-256', data);
+                return Array.from(new Uint8Array(hash))
+                    .map(b => b.toString(16).padStart(2, '0')).join('');
+            } catch (e) {}
+        }
+        let h1 = 0, h2 = 0;
+        for (let i = 0; i < salted.length; i++) {
+            const c = salted.charCodeAt(i);
+            h1 = ((h1 << 5) - h1) + c; h1 &= h1;
+            h2 = ((h2 << 7) - h2) + c; h2 &= h2;
+        }
+        return 'fb_' + Math.abs(h1).toString(16) + Math.abs(h2).toString(16);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const savedRole = sessionStorage.getItem('foodboom_admin_role');
+        const savedName = sessionStorage.getItem('foodboom_admin_name');
+        if (savedRole && savedName) {
+            currentRole = savedRole;
+            currentUserData = { name: savedName };
+            document.getElementById('loginSection').style.display = 'none';
+            document.getElementById('dashboardSection').style.display = 'flex';
+            applyRolePermissions();
+            loadData();
+        }
+    });
+
+    async function loginAdmin() {
+        const login = document.getElementById('adminLogin').value.trim();
+        const pass = document.getElementById('adminPass').value;
+
+        if (!login || !pass) return alert('Введите логин и пароль');
+
+        // === ЖЕСТКИЙ ВХОД ДЛЯ АДМИНА ===
+        if (login === 'admin' && pass === '123') {
+            currentRole = 'admin';
+            currentUserData = { name: 'Главный Админ' };
+            sessionStorage.setItem('foodboom_admin_role', 'admin');
+            sessionStorage.setItem('foodboom_admin_name', 'Главный Админ');
+            
+            document.getElementById('loginSection').style.display = 'none';
+            document.getElementById('dashboardSection').style.display = 'flex';
+            applyRolePermissions();
+            loadData();
+            return; 
+        }
+        // ==============================
+
+        const btn = document.querySelector('button[onclick="loginAdmin()"]');
+        btn.disabled = true;
+        btn.textContent = 'Вход...';
+
+        const hash = await hashPassword(pass);
+
+        try {
+            const res = await fetch('/api/login.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ identifier: login, passwordHash: hash })
+            });
+            const result = await res.json();
+
+            if (!result.success) {
+                alert(result.error || 'Неверный логин или пароль');
+                btn.disabled = false;
+                btn.textContent = 'Войти в систему';
+                return;
+            }
+
+            const user = result.user;
+            if (!['admin', 'operator', 'editor'].includes(user.role)) {
+                alert('У вас нет прав для входа в панель управления.');
+                btn.disabled = false;
+                btn.textContent = 'Войти в систему';
+                return;
+            }
+
+            currentRole = user.role;
+            currentUserData = user;
+            sessionStorage.setItem('foodboom_admin_role', currentRole);
+            sessionStorage.setItem('foodboom_admin_name', user.name);
+
+            document.getElementById('loginSection').style.display = 'none';
+            document.getElementById('dashboardSection').style.display = 'flex';
+            applyRolePermissions();
+            loadData();
+
+        } catch (e) {
+            alert('Ошибка соединения с сервером');
+            btn.disabled = false;
+            btn.textContent = 'Войти в систему';
+        }
+    }
+
+    function logoutAdmin() {
+        sessionStorage.removeItem('foodboom_admin_role');
+        sessionStorage.removeItem('foodboom_admin_name');
+        location.reload();
+    }
+
+    function applyRolePermissions() {
+        document.querySelectorAll('.sidebar__link').forEach(link => {
+            const roles = link.dataset.role.split(',');
+            if (roles.includes(currentRole)) {
+                link.style.display = 'flex';
+            } else {
+                link.style.display = 'none';
+            }
+        });
+        
+        if (currentRole === 'editor') {
+            switchTab('news', document.querySelector('[onclick="switchTab(\'news\', this)"]'));
+        } else if (currentRole === 'operator') {
+            switchTab('orders', document.querySelector('[onclick="switchTab(\'orders\', this)"]'));
+        } else {
+            switchTab('dashboard', document.querySelector('[onclick="switchTab(\'dashboard\', this)"]'));
+        }
+    }
+
+    function switchTab(tabId, element) {
+        document.querySelectorAll('.tab-content').forEach(tab => tab.style.display = 'none');
+        document.getElementById('tab-' + tabId).style.display = 'block';
+        document.querySelectorAll('.sidebar__link').forEach(link => link.classList.remove('active'));
+        if (element) element.classList.add('active');
+    }
+
+    async function loadData() {
+        try {
+            if (currentRole === 'admin') {
+                const [ordersRes, usersRes, reqRes, newsRes] = await Promise.all([
+                    fetch('api/get_orders.php'), fetch('api/get_users.php'),
+                    fetch('api/get_requests.php'), fetch('api/get_news.php')
+                ]);
+                allOrders = await ordersRes.json();
+                allUsers = await usersRes.json();
+                allRequests = await reqRes.json();
+                allNews = await newsRes.json();
+                
+                updateDashboard(); renderOrders(); renderUsers(); renderRequests(); renderNews();
+            } 
+            else if (currentRole === 'operator') {
+                const [ordersRes, reqRes] = await Promise.all([
+                    fetch('api/get_orders.php'), fetch('api/get_requests.php')
+                ]);
+                allOrders = await ordersRes.json();
+                allRequests = await reqRes.json();
+                renderOrders(); renderRequests();
+            } 
+            else if (currentRole === 'editor') {
+                const newsRes = await fetch('api/get_news.php');
+                allNews = await newsRes.json();
+                renderNews();
+            }
+        } catch (e) { console.error(e); alert('Ошибка загрузки данных.'); }
+    }
+
+    function formatDate(dateString) {
+        if (!dateString) return '-';
+        return new Date(dateString).toLocaleString('ru-RU', {day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute:'2-digit'});
+    }
+
+    function updateDashboard() {
+        let revenue = allOrders.reduce((sum, o) => o.status === 'done' ? sum + o.total : sum, 0);
+        document.getElementById('statOrders').textContent = allOrders.length;
+        document.getElementById('statRevenue').innerHTML = `${revenue.toLocaleString('ru-RU')} <span>₽</span>`;
+        document.getElementById('statRequests').textContent = allRequests.length;
+        document.getElementById('statNews').textContent = allNews.length;
+
+        const recentBody = document.getElementById('recentOrdersBody');
+        recentBody.innerHTML = '';
+        allOrders.slice(0, 5).forEach(o => {
+            const cls = 'status-' + o.status;
+            const names = {new: 'Новый', cooking: 'Готовится', delivery: 'В доставке', done: 'Выполнен'};
+            recentBody.innerHTML += `<tr>
+                <td><strong>${o.id}</strong></td>
+                <td>${formatDate(o.date)}</td>
+                <td>${o.customer.name}</td>
+                <td><strong style="color:#ff5e1a">${o.total} ₽</strong></td>
+                <td><span class="status-select ${cls}" style="cursor:default; display:inline-block; padding: 4px 8px;">${names[o.status] || o.status}</span></td>
+            </tr>`;
+        });
+    }
+
+    function renderOrders() {
+        const tbody = document.getElementById('ordersTableBody');
+        const searchInput = document.getElementById('orderSearch');
+        const search = searchInput ? searchInput.value.toLowerCase() : '';
+        tbody.innerHTML = '';
+        allOrders.forEach(o => {
+            if (o.customer.name.toLowerCase().includes(search) || o.customer.phone.includes(search)) {
+                let cls = 'status-' + o.status;
+                tbody.innerHTML += `<tr>
+                    <td><strong>${o.id}</strong></td>
+                    <td>${formatDate(o.date)}</td>
+                    <td>${o.customer.name}<br><small>${o.customer.phone}</small></td>
+                    <td><strong style="color:#ff5e1a">${o.total} ₽</strong></td>
+                    <td>
+                        <select class="status-select ${cls}" onchange="changeOrderStatus('${o.id}', this)">
+                            <option value="new" ${o.status === 'new' ? 'selected' : ''}>Новый</option>
+                            <option value="cooking" ${o.status === 'cooking' ? 'selected' : ''}>Готовится</option>
+                            <option value="delivery" ${o.status === 'delivery' ? 'selected' : ''}>В доставке</option>
+                            <option value="done" ${o.status === 'done' ? 'selected' : ''}>Выполнен</option>
+                        </select>
+                    </td>
+                    <td>
+                        <button class="btn-icon" onclick="viewOrder('${o.id}')">👁️</button>
+                        <button class="btn-icon" style="color:#e74c3c" onclick="deleteOrder('${o.id}')">🗑️</button>
+                    </td>
+                </tr>`;
+            }
+        });
+    }
+
+    async function changeOrderStatus(id, el) {
+        await fetch('api/update_order.php', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({id: id, status: el.value}) });
+        loadData();
+    }
+    async function deleteOrder(id) {
+        if(!confirm('Удалить заказ?')) return;
+        await fetch('api/delete_order.php', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({id: id}) });
+        loadData();
+    }
+    function viewOrder(id) {
+        const o = allOrders.find(x => x.id === id); if(!o) return;
+        document.getElementById('modalOrderId').textContent = '#' + o.id;
+        document.getElementById('modalOrderName').textContent = o.customer.name;
+        document.getElementById('modalOrderPhone').textContent = o.customer.phone;
+        document.getElementById('modalOrderAddress').textContent = o.customer.address;
+        document.getElementById('modalOrderPayment').textContent = o.payment;
+        document.getElementById('modalOrderTotal').textContent = o.total + ' ₽';
+        document.getElementById('modalOrderItems').innerHTML = o.items.map(i => `<li>${i.name} × ${i.qty}</li>`).join('');
+        document.getElementById('orderModal').classList.add('show');
+    }
+    function closeOrderModal() { document.getElementById('orderModal').classList.remove('show'); }
+
+    function renderRequests() {
+        const tbody = document.getElementById('requestsTableBody');
+        tbody.innerHTML = '';
+        allRequests.forEach(r => {
+            const cls = r.status === 'new' ? 'status-new' : 'status-done';
+            const statusName = r.status === 'new' ? 'Новая' : 'Обработана';
+            tbody.innerHTML += `<tr>
+                <td>${formatDate(r.date)}</td>
+                <td>${r.name}</td>
+                <td>${r.phone}</td>
+                <td>${r.comment || '-'}</td>
+                <td><span class="status-select ${cls}" style="cursor:default; display:inline-block; padding: 4px 8px;">${statusName}</span></td>
+                <td>${r.status === 'new' ? `<button class="btn-icon" title="Обработать" onclick="processRequest('${r.id}')">✅</button>` : ''}</td>
+            </tr>`;
+        });
+    }
+    async function processRequest(id) {
+        await fetch('api/update_request.php', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({id: id, status: 'done'}) });
+        loadData();
+    }
+
+    function renderNews() {
+        const tbody = document.getElementById('newsTableBody');
+        tbody.innerHTML = '';
+        allNews.forEach(n => {
+            tbody.innerHTML += `<tr>
+                <td>${formatDate(n.date)}</td>
+                <td><strong>${n.title}</strong></td>
+                <td>${n.content.substring(0, 50)}...</td>
+                <td><button class="btn-icon" style="color:#e74c3c" onclick="deleteNews('${n.id}')">🗑️</button></td>
+            </tr>`;
+        });
+    }
+    function openNewsModal() { document.getElementById('newsModal').classList.add('show'); }
+    function closeNewsModal() { document.getElementById('newsModal').classList.remove('show'); }
+    async function saveNews() {
+        const title = document.getElementById('newsTitle').value;
+        const content = document.getElementById('newsContent').value;
+        if(!title || !content) return alert('Заполните поля');
+        await fetch('api/save_news.php', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({title, content}) });
+        closeNewsModal(); loadData();
+    }
+    async function deleteNews(id) {
+        if(!confirm('Удалить новость?')) return;
+        await fetch('api/delete_news.php', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({id}) });
+        loadData();
+    }
+
+    function renderUsers() {
+        const tbody = document.getElementById('usersTableBody');
+        tbody.innerHTML = '';
+        allUsers.forEach(u => {
+            const roleNames = {user: 'Клиент', operator: 'Оператор', editor: 'Редактор', admin: 'Админ'};
+            const roleCls = u.role === 'admin' ? 'badge-admin' : (u.role === 'user' ? 'badge-user' : 'badge-role');
+            tbody.innerHTML += `<tr>
+                <td><strong>${u.name}</strong></td>
+                <td>${u.email}</td>
+                <td>${u.phone}</td>
+                <td><span class="badge ${roleCls}">${roleNames[u.role] || 'Клиент'}</span></td>
+                <td><button class="btn-icon" style="color:#e74c3c" onclick="deleteUser('${u.id}')">🗑️</button></td>
+            </tr>`;
+        });
+    }
+    async function deleteUser(id) {
+        if(!confirm('Удалить пользователя?')) return;
+        await fetch('api/delete_user.php', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({id}) });
+        loadData();
+    }
+    function openUserModal() { document.getElementById('userModal').classList.add('show'); }
+    function closeUserModal() { document.getElementById('userModal').classList.remove('show'); }
+    async function saveNewUser() {
+        const name = document.getElementById('newUserName').value;
+        const email = document.getElementById('newUserEmail').value;
+        const phone = document.getElementById('newUserPhone').value;
+        const pass = document.getElementById('newUserPass').value;
+        const role = document.getElementById('newUserRole').value;
+        
+        if(!name || !email || !pass) return alert('Заполните обязательные поля');
+        const passwordHash = await hashPassword(pass);
+
+        const res = await fetch('api/save_user.php', {
+            method: 'POST', headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({ name, email, phone, phoneDigits: phone.replace(/\D/g,''), passwordHash, role })
+        });
+        
+        const result = await res.json();
+        if(result.success) { 
+            closeUserModal(); 
+            document.getElementById('newUserName').value = '';
+            document.getElementById('newUserEmail').value = '';
+            document.getElementById('newUserPhone').value = '';
+            document.getElementById('newUserPass').value = '';
+            loadData(); 
+        } else alert(result.error);
+    }
+</script>
+</body>
+</html>

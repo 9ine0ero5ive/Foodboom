@@ -1,0 +1,25 @@
+[
+    {
+        "name": "rus",
+        "email": "mpro1@gmail.com",
+        "phone": "+7 (999) 999-99-99",
+        "phoneDigits": "79999999999",
+        "passwordHash": "5cf55a9ca664d71aa300f7b22c839d9f06d1aaa76eb314a85ee69d1da12bc639",
+        "marketing": false,
+        "consentPD": true,
+        "consentPolicy": true,
+        "consentDate": "2026-10-31T04:17:42.285Z",
+        "id": "u_6ae56be647d36",
+        "createdAt": "2026-10-31 13:17:42"
+    },
+    {
+        "name": "Karl",
+        "email": "karl@gmail.com",
+        "phone": "79999999999",
+        "phoneDigits": "79999999999",
+        "passwordHash": "d8dec3a5a5204e82a5a3d54d9ec57b30a86876ab2ecad2046b2b65d7f73ed979",
+        "role": "editor",
+        "id": "u_6ae930570d226",
+        "createdAt": "2026-11-03 09:52:39"
+    }
+]
