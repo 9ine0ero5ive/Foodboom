@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /admin.html
+Disallow: /auth.html
+Disallow: /api/
+
+Sitemap: https://foodboom-delivery.mpro329.chatgpt.site/sitemap.xml
